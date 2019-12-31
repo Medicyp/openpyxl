@@ -1,0 +1,48 @@
+>>> os.chdir('C:\\Users\\Djinn\\Desktop')
+>>> wb = openpyxl.load_workbook('example.xlsx')
+>>> type(wb)
+<class 'openpyxl.workbook.workbook.Workbook'>
+>>> wb.get_sheet_names()
+__main__:1: DeprecationWarning: Call to deprecated function get_sheet_names (Use wb.sheetnames).
+['Feuil1']
+>>> wb.sheetnames
+['Feuil1']
+>>> sheet = wb.sheetnames
+>>> type(sheet)
+<class 'list'>
+>>> sheet
+['Feuil1']
+>>> sheet['A1'].value = 1
+>>> wb.save('example2.xlsx')
+>>> wb
+<openpyxl.workbook.workbook.Workbook object at 0x0000013E1FFC1A48>
+>>> sheet['A1'].value
+1
+>>> sheet['B1'].value = 'Bananas'
+>>> wb.save('example2.xlsx')
+>>> sheet.title
+'Feuil1'
+>>> sheet.title = 'My sheet name'
+>>> sheet.cell(row=1,column=2).value
+'Bananas'
+>>> sheet.cell(row=2,column=2).value
+>>> wb = openpyxl.load_workbook('example2.xlsx')
+>>> sheet.cell(row=2,column=2).value
+>>> sheet.cell(row=1,column=2).value
+'Bananas'
+>>> wb.save('example2.xlsx')
+>>> sheet.cell(row=2,column=2).value
+>>> wb = openpyxl.load_workbook('example3.xlsx')
+>>> sheet.cell(row=2,column=2).value
+>>> sheet.cell(row=1,column=2).value
+'Bananas'
+>>> sheet.cell(row=2,column=2).value = 'Apples'
+>>> sheet.cell(row=3,column=2).value = 'Peaches'
+>>> wb.save('example2.xlsx')
+>>> sheet.max_row
+3
+>>> sheet.max_column
+53
+>>> wb.create_sheet(title="Sheet number 2", index=0)
+<Worksheet "Sheet number 2">
+>>> wb.save('example2.xlsx')
